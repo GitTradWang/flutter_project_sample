@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
+import 'package:flutterprojectsample/net/net_exception.dart';
 import 'package:flutterprojectsample/net/request_urls.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -46,9 +47,9 @@ class Net {
         onReceiveProgress: onReceiveProgress,
       ));
     } on DioError catch (e) {
-      throw Exception(_formatError(e));
+      throw NetException(_formatError(e));
     } on Exception {
-      throw Exception('网络错误，请稍后再试');
+      throw NetException('网络错误，请稍后再试');
     }
   }
 
@@ -72,9 +73,9 @@ class Net {
         onReceiveProgress: onReceiveProgress,
       ));
     } on DioError catch (e) {
-      throw Exception(_formatError(e));
+      throw NetException(_formatError(e));
     } on Exception {
-      throw Exception('网络错误，请稍后再试');
+      throw NetException('网络错误，请稍后再试');
     }
   }
 
@@ -98,9 +99,9 @@ class Net {
         onReceiveProgress: onReceiveProgress,
       ));
     } on DioError catch (e) {
-      throw Exception(_formatError(e));
+      throw NetException(_formatError(e));
     } on Exception {
-      throw Exception('网络错误，请稍后再试');
+      throw NetException('网络错误，请稍后再试');
     }
   }
 
@@ -108,7 +109,7 @@ class Net {
     if (_isSuccess(response)) {
       return response.data;
     } else {
-      throw Exception(_parseNetStatusCode(response));
+      throw NetException(_parseNetStatusCode(response));
     }
   }
 
