@@ -11,21 +11,23 @@ class AppNavigator {
   static final _AppNavigatorObserverManager _navigatorObserver = _AppNavigatorObserverManager();
 
   static Router get router => _router;
+
   static GlobalKey<NavigatorState> get navigatorKey => _navigatorKey;
+
   static _AppNavigatorObserverManager get appNavigatorManager => _navigatorObserver;
 
   ///跳转页面 [routerName] 路由名 [arguments] 参数 [replace] 是否替换当前页面 [clearStack] 是否清除路由栈 [transition] 页面切换样式 [transitionDuration] 时间 [transitionBuilder] 自定义切换样式
   ///默认使用主题中自带的切换样式
   static Future<dynamic> navigateTo(
-    BuildContext context,
-    String routerName, {
-    Map<String, dynamic> arguments,
-    bool replace = false,
-    bool clearStack = false,
-    TransitionType transition = TransitionType.native,
-    Duration transitionDuration = const Duration(milliseconds: 250),
-    RouteTransitionsBuilder transitionBuilder,
-  }) {
+      BuildContext context,
+      String routerName, {
+        Map<String, dynamic> arguments,
+        bool replace = false,
+        bool clearStack = false,
+        TransitionType transition = TransitionType.native,
+        Duration transitionDuration = const Duration(milliseconds: 250),
+        RouteTransitionsBuilder transitionBuilder,
+      }) {
     String path = suffixArguments(routerName, arguments: arguments); //拼接参数
     return router.navigateTo(
       context,
@@ -38,17 +40,21 @@ class AppNavigator {
     );
   }
 
+  static void pop(BuildContext context, [dynamic result]) {
+    Navigator.pop(context, result);
+  }
+
   ///不使用context跳转页面（这种跳转因为使用Navigator的context，所以在RouteHandler中的context不是跳转的context）
   ///谨慎使用，非特殊原因不建议使用此方法
   static Future<dynamic> navigateToWithoutContext(
-    String routerName, {
-    Map<String, dynamic> arguments,
-    bool replace = false,
-    bool clearStack = false,
-    TransitionType transition = TransitionType.native,
-    Duration transitionDuration = const Duration(milliseconds: 250),
-    RouteTransitionsBuilder transitionBuilder,
-  }) {
+      String routerName, {
+        Map<String, dynamic> arguments,
+        bool replace = false,
+        bool clearStack = false,
+        TransitionType transition = TransitionType.native,
+        Duration transitionDuration = const Duration(milliseconds: 250),
+        RouteTransitionsBuilder transitionBuilder,
+      }) {
     String path = suffixArguments(routerName, arguments: arguments); //拼接参数
     RouteMatch routeMatch = router.matchRoute(
       navigatorKey.currentContext,
@@ -82,6 +88,12 @@ class AppNavigator {
     return future;
   }
 
+  static void popWithoutContext([dynamic result]) {
+    if (navigatorKey.currentState.canPop()) {
+      navigatorKey.currentState.pop(result);
+    }
+  }
+
   /// 拼接参数符合fluro命名规则 [routerName] 路由名称 [arguments] 参数
   /// 最终会拼接成 routerName?aaa=111&bbb=222 形式
   static suffixArguments(String routerName, {Map<String, dynamic> arguments = const {}}) {
@@ -102,24 +114,31 @@ class AppNavigator {
 }
 
 class _AppNavigatorObserverManager extends NavigatorObserver {
+  List<Route> _cacheRoutes = [];
+
   @override
   void didPop(Route<dynamic> route, Route<dynamic> previousRoute) {
     super.didPop(route, previousRoute);
+    _cacheRoutes.remove(route);
   }
 
   @override
   void didPush(Route<dynamic> route, Route<dynamic> previousRoute) {
     super.didPush(route, previousRoute);
+    _cacheRoutes.add(route);
   }
 
   @override
   void didRemove(Route<dynamic> route, Route<dynamic> previousRoute) {
     super.didRemove(route, previousRoute);
+    _cacheRoutes.remove(route);
   }
 
   @override
   void didReplace({Route<dynamic> newRoute, Route<dynamic> oldRoute}) {
     super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
+    _cacheRoutes.remove(oldRoute);
+    _cacheRoutes.add(newRoute);
   }
 
   @override
@@ -130,5 +149,29 @@ class _AppNavigatorObserverManager extends NavigatorObserver {
   @override
   void didStartUserGesture(Route<dynamic> route, Route<dynamic> previousRoute) {
     super.didStartUserGesture(route, previousRoute);
+  }
+
+  ///正序获取Route
+  ///多个一样的只会获取靠近栈底的route
+  Route getRouteByAsc(RoutePredicate predicate) {
+    return _cacheRoutes.firstWhere((route) => predicate(route));
+  }
+
+  ///倒序获取[predicate]对应Route
+  ///多个一样的只会获取靠近栈顶的route
+  Route getRouteByDesc(RoutePredicate predicate) {
+    return _cacheRoutes.lastWhere((route) => predicate(route));
+  }
+
+  ///获取栈顶route
+  Route getTopRoute() {
+    return _cacheRoutes.last;
+  }
+
+  ///当前的Route是不是弹窗
+  bool currentIsDialog() {
+    var topRoute = getTopRoute();
+    //是PopupRoute并且是透明
+    return topRoute != null && topRoute is PopupRoute && topRoute.opaque != true;
   }
 }
