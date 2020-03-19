@@ -24,18 +24,22 @@ class AppNavigator {
     navigatorKey.currentState.popUntil(predicate);
   }
 
+  static bool canPop() {
+    return navigatorKey.currentState.canPop();
+  }
+
   ///跳转页面 [routerName] 路由名 [arguments] 参数 [replace] 是否替换当前页面 [clearStack] 是否清除路由栈 [transition] 页面切换样式 [transitionDuration] 时间 [transitionBuilder] 自定义切换样式
   ///默认使用主题中自带的切换样式
   static Future<dynamic> navigateTo(
-      BuildContext context,
-      String routerName, {
-        Map<String, dynamic> arguments,
-        bool replace = false,
-        bool clearStack = false,
-        TransitionType transition = TransitionType.native,
-        Duration transitionDuration = const Duration(milliseconds: 250),
-        RouteTransitionsBuilder transitionBuilder,
-      }) {
+    BuildContext context,
+    String routerName, {
+    Map<String, dynamic> arguments,
+    bool replace = false,
+    bool clearStack = false,
+    TransitionType transition = TransitionType.native,
+    Duration transitionDuration = const Duration(milliseconds: 250),
+    RouteTransitionsBuilder transitionBuilder,
+  }) {
     String path = suffixArguments(routerName, arguments: arguments); //拼接参数
     RouteMatch routeMatch = router.matchRoute(
       navigatorKey.currentContext,
@@ -73,14 +77,14 @@ class AppNavigator {
   ///不使用context跳转页面（这种跳转因为使用Navigator的context，所以在RouteHandler中的context不是跳转的context）
   ///谨慎使用，非特殊原因不建议使用此方法
   static Future<dynamic> navigateToWithoutContext(
-      String routerName, {
-        Map<String, dynamic> arguments,
-        bool replace = false,
-        bool clearStack = false,
-        TransitionType transition = TransitionType.native,
-        Duration transitionDuration = const Duration(milliseconds: 250),
-        RouteTransitionsBuilder transitionBuilder,
-      }) {
+    String routerName, {
+    Map<String, dynamic> arguments,
+    bool replace = false,
+    bool clearStack = false,
+    TransitionType transition = TransitionType.native,
+    Duration transitionDuration = const Duration(milliseconds: 250),
+    RouteTransitionsBuilder transitionBuilder,
+  }) {
     String path = suffixArguments(routerName, arguments: arguments); //拼接参数
     RouteMatch routeMatch = router.matchRoute(
       navigatorKey.currentContext,
