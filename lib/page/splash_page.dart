@@ -16,7 +16,6 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-
   static const _TIME_PASS = 3;
 
   Timer _timer;
@@ -39,18 +38,15 @@ class _SplashPageState extends State<SplashPage> {
           }
         });
       });
-    }).catchError((error) {
+    }).catchError((error, stackTrace) {
+      debug('数据初始化失败！', error: error, stackTrace: stackTrace);
       AppNavigator.navigateTo(context, RouterName.homePage, transition: TransitionType.fadeIn, replace: true);
     });
   }
 
   Future<void> prepareInitData() async {
-    try {
-      print(DateTime.now().millisecond);
-      await AppModel.instance.init();
-      await UserModel.instance.init();
-      print(DateTime.now().millisecond);
-    } on Error {} on Exception {}
+    await AppModel.instance.init();
+    await UserModel.instance.init();
   }
 
   @override
