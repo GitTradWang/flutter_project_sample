@@ -18,6 +18,8 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		A225B8CC243C171B00E076F4 /* ProjectPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A225B8CB243C171B00E076F4 /* ProjectPlugin.swift */; };
+		A225B8CE243C18D800E076F4 /* ProjectPluginMethodHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A225B8CD243C18D800E076F4 /* ProjectPluginMethodHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,6 +55,8 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A225B8CB243C171B00E076F4 /* ProjectPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPlugin.swift; sourceTree = "<group>"; };
+		A225B8CD243C18D800E076F4 /* ProjectPluginMethodHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPluginMethodHandler.swift; sourceTree = "<group>"; };
 		E586285CBF0D530ED2E3CEC6 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		EAE49F9912CA8E41A0DF3B09 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +137,8 @@
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
+				A225B8CB243C171B00E076F4 /* ProjectPlugin.swift */,
+				A225B8CD243C18D800E076F4 /* ProjectPluginMethodHandler.swift */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -289,7 +295,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A225B8CE243C18D800E076F4 /* ProjectPluginMethodHandler.swift in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
+				A225B8CC243C171B00E076F4 /* ProjectPlugin.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

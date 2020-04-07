@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterprojectsample/channel/project_plugin.dart';
 import 'package:flutterprojectsample/config/app_navigator.dart';
 import 'package:flutterprojectsample/config/app_router.dart';
 import 'package:flutterprojectsample/model/app_model.dart';
@@ -25,6 +26,10 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
+
+    ProjectPlugin.getAppVersion().then((version) {
+      debug(version);
+    });
 
     prepareInitData().then((_) {
       _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {

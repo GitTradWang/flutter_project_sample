@@ -8,12 +8,12 @@ import io.flutter.plugin.common.MethodChannel
 
 class ProjectMethodCallHandler(private val messenger: BinaryMessenger, private val context: Context) : MethodChannel.MethodCallHandler {
 
-    var activityPluginBinding: ActivityPluginBinding? = null
+    private var activityPluginBinding: ActivityPluginBinding? = null
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         when (call.method) {
             "getAppVersion" -> ProjectHandlerMethod.getAppVersion(applicationContext(), call, result)
-            "startSelectedImage"->ProjectHandlerMethod.startSelectedImage(activity(),call,result)
+            "startSelectedImage" -> ProjectHandlerMethod.startSelectedImage(activity(), call, result)
             else -> result.notImplemented()
 
         }
