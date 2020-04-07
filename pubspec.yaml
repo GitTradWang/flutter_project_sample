@@ -47,7 +47,7 @@ dependencies:
   #图片保存到相册
   image_gallery_saver: ^1.2.2
   #谁用谁闪亮
-  shimmer: ^1.1.0
+  shimmer: ^1.1.1
   #大图预览
   photo_view: ^0.5.0
   #解析Html标签
@@ -58,6 +58,8 @@ dependencies:
   flutter_screenutil: ^1.0.2
   #国际化
   intl: any
+  #视频播放
+  video_player: ^0.10.8+1
 
 dev_dependencies:
   flutter_test:
