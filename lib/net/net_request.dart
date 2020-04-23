@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutterprojectsample/net/net_exception.dart';
 import 'package:flutterprojectsample/net/request_urls.dart';
@@ -11,23 +8,21 @@ class Net {
 
   Dio _dio;
 
-  String _cookieCachePath;
-
   Net._();
 
   static Net get instance => _instance ?? (_instance = Net._());
 
   Future<void> init() async {
-    _cookieCachePath = '${(await getApplicationDocumentsDirectory()).path}/cookie/';
+
     BaseOptions _options = BaseOptions(
       baseUrl: URL_BASE,
       connectTimeout: 3000,
       receiveTimeout: 3000,
       responseType: ResponseType.json,
-      contentType: ContentType.json,
+      //contentType: ContentType.json,
     );
     _dio = Dio(_options);
-    _dio.interceptors.add(CookieManager(PersistCookieJar(dir: _cookieCachePath)));
+
     _dio.interceptors.add(LogInterceptor());
   }
 

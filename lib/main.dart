@@ -20,7 +20,8 @@ _init() {
   defineRoutes(AppNavigator.router);
   if (Platform.isAndroid) {
     //透明状态栏
-    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+    SystemUiOverlayStyle systemUiOverlayStyle =
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent);
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   }
 }
@@ -40,8 +41,10 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: <SingleChildWidget>[
-        ChangeNotifierProvider<AppModel>(create: (BuildContext context) => AppModel()),
-        ChangeNotifierProvider<UserModel>(create: (BuildContext context) => UserModel()),
+        ChangeNotifierProvider<AppModel>(
+            create: (BuildContext context) => AppModel()),
+        ChangeNotifierProvider<UserModel>(
+            create: (BuildContext context) => UserModel()),
       ],
       child: MaterialApp(
         title: '例子',
@@ -50,7 +53,8 @@ class _AppState extends State<App> {
         home: SplashPage(),
         themeMode: ThemeMode.system,
         navigatorKey: AppNavigator.navigatorKey,
-        onGenerateRoute: (RouteSettings settings) => AppNavigator.router.generator(settings),
+        onGenerateRoute: (RouteSettings settings) =>
+            AppNavigator.router.generator(settings),
         debugShowCheckedModeBanner: false,
         navigatorObservers: [AppNavigator.appNavigatorManager],
       ),

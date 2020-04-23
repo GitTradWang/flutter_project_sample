@@ -13,7 +13,7 @@ Future<bool> showToast({
   return Fluttertoast.showToast(
     msg: message,
     toastLength: toastLength,
-    timeInSecForIos: timeInSecForIos,
+    timeInSecForIosWeb: timeInSecForIos,
     fontSize: fontSize,
     gravity: gravity,
     backgroundColor: backgroundColor,
