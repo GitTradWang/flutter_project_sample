@@ -71,17 +71,18 @@ class _SplashPageState extends State<SplashPage> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(top: 40, right: 40),
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).padding.top + 15, right: 15),
               child: InkWell(
                 onTap: () => AppNavigator.navigateTo(
                     context, RouterName.homePage,
                     transition: TransitionType.fadeIn, replace: true),
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(40)),
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
                     color: Theme.of(context).disabledColor,
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 40, horizontal: 40),
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   child: Text(
                     '跳过  $time 秒',
                     style: TextStyle(color: Colors.white),
