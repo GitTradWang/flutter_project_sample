@@ -174,13 +174,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.7"
-  flutter_screenutil:
-    dependency: "direct main"
-    description:
-      name: flutter_screenutil
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.1.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -400,7 +393,7 @@ packages:
       name: permission_handler
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "5.0.0+hotfix.3"
+    version: "5.0.0+hotfix.4"
   permission_handler_platform_interface:
     dependency: transitive
     description:
@@ -485,6 +478,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.24.0"
+  screen_ratio_adapter:
+    dependency: "direct main"
+    description:
+      name: screen_ratio_adapter
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.2"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -678,7 +678,7 @@ packages:
       name: url_launcher_web
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.1.1+1"
+    version: "0.1.1+2"
   uuid:
     dependency: transitive
     description:
@@ -699,7 +699,7 @@ packages:
       name: video_player
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.10.9"
+    version: "0.10.9+1"
   video_player_platform_interface:
     dependency: transitive
     description:

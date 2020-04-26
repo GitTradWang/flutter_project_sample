@@ -5,7 +5,8 @@ class HomeMinePage extends StatefulWidget {
   _HomeMinePageState createState() => _HomeMinePageState();
 }
 
-class _HomeMinePageState extends State<HomeMinePage> with AutomaticKeepAliveClientMixin {
+class _HomeMinePageState extends State<HomeMinePage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -15,7 +16,10 @@ class _HomeMinePageState extends State<HomeMinePage> with AutomaticKeepAliveClie
         title: Text('我的'),
       ),
       body: Center(
-        child: Text('我的'),
+        child: Text(
+          '我的',
+          style: TextStyle(color: Colors.deepOrange),
+        ),
       ),
     );
   }

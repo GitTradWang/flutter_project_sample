@@ -43,7 +43,7 @@ dependencies:
   #二维码生成
   qr_flutter: ^3.2.0
   #权限申请
-  permission_handler: ^5.0.0+hotfix.3
+  permission_handler: ^5.0.0+hotfix.4
   #图片保存到相册
   image_gallery_saver: ^1.2.2
   #谁用谁闪亮
@@ -54,12 +54,13 @@ dependencies:
   flutter_html: ^0.11.1
   #路由框架
   fluro: ^1.6.3
-  #屏幕适配
-  flutter_screenutil: ^1.1.0
+
   #国际化
   intl: any
   #视频播放
-  video_player: ^0.10.9
+  video_player: ^0.10.9+1
+
+  screen_ratio_adapter: ^0.0.2
 
 dev_dependencies:
 

@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutterprojectsample/net/net_exception.dart';
 import 'package:flutterprojectsample/net/request_urls.dart';
-import 'package:path_provider/path_provider.dart';
 
 class Net {
   static Net _instance;

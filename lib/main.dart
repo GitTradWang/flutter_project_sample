@@ -10,9 +10,10 @@ import 'package:flutterprojectsample/model/user_model.dart';
 import 'package:flutterprojectsample/page/splash_page.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
+import 'package:screen_ratio_adapter/screen_ratio_adapter.dart';
 
 void main() {
-  runApp(App());
+  runFxApp(App(), uiSize: Size(375, 667));
   _init();
 }
 
