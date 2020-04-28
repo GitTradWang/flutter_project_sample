@@ -82,7 +82,7 @@ class _SplashPageState extends State<SplashPage> {
                     borderRadius: BorderRadius.all(Radius.circular(30)),
                     color: Theme.of(context).disabledColor,
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
                   child: Text(
                     '跳过  $time 秒',
                     style: TextStyle(color: Colors.white),

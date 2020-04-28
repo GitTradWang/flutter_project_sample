@@ -18,7 +18,6 @@ class Net {
       connectTimeout: 3000,
       receiveTimeout: 3000,
       responseType: ResponseType.json,
-      //contentType: ContentType.json,
     );
     _dio = Dio(_options);
 
