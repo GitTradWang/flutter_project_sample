@@ -2,17 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutterprojectsample/widget/page_state_widget.dart';
 import 'package:provider/provider.dart';
 
-typedef ChildBuilder<T extends BaseProviderModel> = Widget Function(
-    BuildContext context, T t);
+typedef ChildBuilder<T extends BaseProviderModel> = Widget Function(BuildContext context, T t);
 
-typedef ErrorBuilder<T extends BaseProviderModel> = Widget Function(
-    BuildContext context, T t);
+typedef ErrorBuilder<T extends BaseProviderModel> = Widget Function(BuildContext context, T t);
 
-typedef EmptyBuilder<T extends BaseProviderModel> = Widget Function(
-    BuildContext context, T t);
+typedef EmptyBuilder<T extends BaseProviderModel> = Widget Function(BuildContext context, T t);
 
-typedef LoadingBuilder<T extends BaseProviderModel> = Widget Function(
-    BuildContext context, T t);
+typedef LoadingBuilder<T extends BaseProviderModel> = Widget Function(BuildContext context, T t);
 
 class BaseProviderWidget<T extends BaseProviderModel> extends StatelessWidget {
   final Widget child;
@@ -44,19 +40,13 @@ class BaseProviderWidget<T extends BaseProviderModel> extends StatelessWidget {
               return child;
               break;
             case WidgetState.ERROR:
-              return errorBuilder == null
-                  ? Container()
-                  : errorBuilder(context, value);
+              return errorBuilder == null ? Container() : errorBuilder(context, value);
               break;
             case WidgetState.EMPTY:
-              return emptyBuilder == null
-                  ? Container()
-                  : emptyBuilder(context, value);
+              return emptyBuilder == null ? Container() : emptyBuilder(context, value);
               break;
             case WidgetState.LOADING:
-              return loadingBuilder == null
-                  ? Container()
-                  : loadingBuilder(context, value);
+              return loadingBuilder == null ? Container() : loadingBuilder(context, value);
               break;
           }
           return child;
@@ -70,8 +60,7 @@ class BaseProviderWidget<T extends BaseProviderModel> extends StatelessWidget {
 class BaseProviderModel extends ChangeNotifier {
   WidgetState _widgetState;
 
-  BaseProviderModel({WidgetState state})
-      : _widgetState = state == null ? WidgetState.CONTENT : state;
+  BaseProviderModel({WidgetState state}) : _widgetState = state == null ? WidgetState.CONTENT : state;
 
   WidgetState get widgetState => _widgetState;
 
@@ -146,19 +135,9 @@ class BasePageWidget<T extends BasePageModel> extends StatelessWidget {
       body: BaseProviderWidget<T>(
         child: body,
         create: create,
-        emptyBuilder: emptyBuilder ??
-            (context, T t) => PageEmptyWidget(
-                  text: t.emptyMessage,
-                ),
-        errorBuilder: errorBuilder ??
-            (context, T t) => PageErrorWidget(
-                  text: t.errorMessge,
-                  callback: () => t.block(t),
-                ),
-        loadingBuilder: loadingBuilder ??
-            (context, T t) => PageLoadingWidget(
-                  text: t.loadingMessage,
-                ),
+        emptyBuilder: emptyBuilder ?? (context, T t) => PageEmptyWidget(text: t.emptyMessage),
+        errorBuilder: errorBuilder ?? (context, T t) => PageErrorWidget(text: t.errorMessge, callback: () => t.block(t)),
+        loadingBuilder: loadingBuilder ?? (context, T t) => PageLoadingWidget(text: t.loadingMessage),
       ),
     );
   }
