@@ -7,25 +7,34 @@ import 'package:flutter/material.dart';
 ///页面路由跳转
 class AppNavigator {
   static final Router _router = Router.appRouter;
-  static final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
-  static final _AppNavigatorObserverManager _navigatorObserver = _AppNavigatorObserverManager();
+  static final GlobalKey<NavigatorState> _navigatorKey =
+      GlobalKey<NavigatorState>();
+  static final _AppNavigatorObserverManager _navigatorObserver =
+      _AppNavigatorObserverManager();
 
   static Router get router => _router;
 
   static GlobalKey<NavigatorState> get navigatorKey => _navigatorKey;
 
-  static _AppNavigatorObserverManager get appNavigatorManager => _navigatorObserver;
-
-  static void pop([dynamic result]) {
-    navigatorKey.currentState.pop(result);
-  }
+  static _AppNavigatorObserverManager get appNavigatorManager =>
+      _navigatorObserver;
 
   static void popUntil(RoutePredicate predicate) {
     navigatorKey.currentState.popUntil(predicate);
   }
 
+  /// pop时判断是否时flutter的最后一个页面，若不是才能pop防止黑屏
+  static void pop([dynamic result]) {
+    if (AppNavigator._navigatorObserver.getStackSize() != 1) {
+      navigatorKey.currentState.pop(result);
+    }
+  }
+
+  ///能否pop最后一个页面不能被pop掉
   static bool canPop() {
-    return navigatorKey.currentState.canPop();
+    return AppNavigator._navigatorObserver.getStackSize() == 1
+        ? false
+        : navigatorKey.currentState.canPop();
   }
 
   ///跳转页面 [routerName] 路由名 [arguments] 参数 [replace] 是否替换当前页面 [clearStack] 是否清除路由栈 [transition] 页面切换样式 [transitionDuration] 时间 [transitionBuilder] 自定义切换样式
@@ -60,9 +69,12 @@ class AppNavigator {
       }
       if (route != null) {
         if (clearStack) {
-          future = Navigator.of(context).pushAndRemoveUntil(route, (check) => false);
+          future =
+              Navigator.of(context).pushAndRemoveUntil(route, (check) => false);
         } else {
-          future = replace ? Navigator.of(context).pushReplacement(route) : Navigator.of(context).push(route);
+          future = replace
+              ? Navigator.of(context).pushReplacement(route)
+              : Navigator.of(context).push(route);
         }
         completer.complete();
       } else {
@@ -105,9 +117,12 @@ class AppNavigator {
       }
       if (route != null) {
         if (clearStack) {
-          future = navigatorKey.currentState.pushAndRemoveUntil(route, (check) => false);
+          future = navigatorKey.currentState
+              .pushAndRemoveUntil(route, (check) => false);
         } else {
-          future = replace ? navigatorKey.currentState.pushReplacement(route) : _navigatorKey.currentState.push(route);
+          future = replace
+              ? navigatorKey.currentState.pushReplacement(route)
+              : _navigatorKey.currentState.push(route);
         }
         completer.complete();
       } else {
@@ -121,16 +136,20 @@ class AppNavigator {
 
   /// 拼接参数符合fluro命名规则 [routerName] 路由名称 [arguments] 参数
   /// 最终会拼接成 routerName?aaa=111&bbb=222 形式
-  static suffixArguments(String routerName, {Map<String, dynamic> arguments = const {}}) {
+  static suffixArguments(String routerName,
+      {Map<String, dynamic> arguments = const {}}) {
     if (arguments != null && arguments.isNotEmpty) {
       String paramStr = Transformer.urlEncodeMap(arguments);
-      return routerName.endsWith('?') ? '$routerName$paramStr' : '$routerName?$paramStr';
+      return routerName.endsWith('?')
+          ? '$routerName$paramStr'
+          : '$routerName?$paramStr';
     }
     return routerName;
   }
 
   static Route<Null> _notFoundRoute(BuildContext context, String path) {
-    RouteCreator<Null> creator = (RouteSettings routeSettings, Map<String, List<String>> parameters) {
+    RouteCreator<Null> creator =
+        (RouteSettings routeSettings, Map<String, List<String>> parameters) {
       return MaterialPageRoute<Null>(
           settings: routeSettings,
           builder: (BuildContext context) {
@@ -195,11 +214,17 @@ class _AppNavigatorObserverManager extends NavigatorObserver {
   Route getTopRoute() {
     return _cacheRoutes.last;
   }
+  ///获取任务栈的的大小
+  int getStackSize() {
+    return _cacheRoutes.length;
+  }
 
   ///当前的Route是不是弹窗
   bool currentIsDialog() {
     var topRoute = getTopRoute();
     //是PopupRoute并且是透明
-    return topRoute != null && topRoute is PopupRoute && topRoute.opaque != true;
+    return topRoute != null &&
+        topRoute is PopupRoute &&
+        topRoute.opaque != true;
   }
 }
