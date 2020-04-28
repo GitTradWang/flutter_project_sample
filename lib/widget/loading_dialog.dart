@@ -11,20 +11,20 @@ class LoadingDialog {
         child: Center(
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(10),
               color: Theme.of(context).scaffoldBackgroundColor,
             ),
-            height: 250,
-            width: 250,
+            height: 120,
+            width: 120,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 CupertinoActivityIndicator(
-                  radius:35,
+                  radius:15,
                 ),
                 SizedBox(
-                  height: 25,
+                  height: 15,
                 ),
                 Text(
                   '加载中',

@@ -1,35 +1,39 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutterprojectsample/config/app_navigator.dart';
-import 'package:flutterprojectsample/config/app_router.dart';
+import 'package:flutterprojectsample/page/home/index/home_index_model.dart';
+import 'package:flutterprojectsample/widget/base/base_page_widget.dart';
 
 class HomeIndexPage extends StatefulWidget {
   @override
   _HomeIndexPageState createState() => _HomeIndexPageState();
 }
 
-class _HomeIndexPageState extends State<HomeIndexPage>
-    with AutomaticKeepAliveClientMixin {
+class _HomeIndexPageState extends State<HomeIndexPage> with AutomaticKeepAliveClientMixin {
+  HomeIndexModel _homeIndexModel = HomeIndexModel();
+
   @override
   void initState() {
     super.initState();
+
+    Timer(Duration(seconds: 3), () {
+     _homeIndexModel.showContent();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
+    return BasePageWidget<HomeIndexModel>(
+      create: (BuildContext context) => _homeIndexModel,
       appBar: AppBar(
         title: Text('首页'),
         centerTitle: true,
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          MaterialButton(
-            onPressed: () =>
-                AppNavigator.navigateTo(context, RouterName.uiSamplePage),
-            child: Text('跳转到例子页面'),
-            color: Colors.greenAccent,
+          Center(
+            child: Text('首页'),
           )
         ],
       ),
