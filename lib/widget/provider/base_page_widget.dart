@@ -77,14 +77,14 @@ enum WidgetState {
   ERROR,
 }
 
-class BasePageModel extends BaseProviderModel {
+class BaseProviderPageModel extends BaseProviderModel {
   String errorMessge ='';
   String emptyMessage='';
   String loadingMessage='';
 
-  void Function(BasePageModel model) block;
+  void Function(BaseProviderPageModel model) block;
 
-  BasePageModel({WidgetState state}) : super(state: state);
+  BaseProviderPageModel({WidgetState state}) : super(state: state);
 
   void showLoading({String message}) {
     loadingMessage = message;
@@ -95,7 +95,7 @@ class BasePageModel extends BaseProviderModel {
     widgetState = WidgetState.CONTENT;
   }
 
-  void showError({String message, Function(BasePageModel model) block}) {
+  void showError({String message, Function(BaseProviderPageModel model) block}) {
     errorMessge = message;
     widgetState = WidgetState.ERROR;
   }
@@ -106,8 +106,9 @@ class BasePageModel extends BaseProviderModel {
   }
 }
 
-class BasePageWidget<T extends BasePageModel> extends StatelessWidget {
-  final AppBar appBar;
+class BaseProviderPageWidget<T extends BaseProviderPageModel> extends StatelessWidget {
+
+  final PreferredSizeWidget appBar;
 
   final Widget body;
 
@@ -119,7 +120,7 @@ class BasePageWidget<T extends BasePageModel> extends StatelessWidget {
 
   final LoadingBuilder<T> loadingBuilder;
 
-  BasePageWidget({
+  BaseProviderPageWidget({
     @required this.create,
     this.appBar,
     this.body,

@@ -62,11 +62,11 @@ class PageLoadingListWidget extends StatelessWidget {
   ///列表个数
   final int length;
 
-  ///每个条目加载中的样式
-  final IndexedWidgetBuilder builder;
+  ///每个页面中list条目
+  final IndexedWidgetBuilder itemBuilder;
 
   PageLoadingListWidget({
-    @required this.builder,
+    @required this.itemBuilder,
     this.length: 7,
     this.padding = const EdgeInsets.all(7),
   });
@@ -76,14 +76,14 @@ class PageLoadingListWidget extends StatelessWidget {
     return SingleChildScrollView(
       physics: NeverScrollableScrollPhysics(),
       child: Shimmer.fromColors(
-        baseColor: Colors.grey[100],
-        highlightColor:Colors.grey[200],
+        baseColor: Colors.grey[200],
+        highlightColor:Colors.grey[100],
         period: const Duration(milliseconds: 2000),
         direction: ShimmerDirection.ttb,
         child: Padding(
           padding: padding,
           child: Column(
-            children: List.generate(length, (index) => builder(context, index)),
+            children: List.generate(length, (index) => itemBuilder(context, index)),
           ),
         ),
       ),

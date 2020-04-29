@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutterprojectsample/widget/project_app_bar.dart';
+import 'package:flutterprojectsample/widget/provider/base_page_widget.dart';
 
 class UISamplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
+    return BaseProviderPageWidget(
+      appBar: ProjectAppBar(
         title: Text('UI使用示例'),
       ),
       body: Stack(
@@ -65,9 +66,14 @@ class UISamplePage extends StatelessWidget {
               ),
             ],
           ),
-
         ],
       ),
+      create: (BuildContext context) {
+        return UISamplePageModel();
+      },
     );
   }
+}
+
+class UISamplePageModel extends BaseProviderPageModel {
 }

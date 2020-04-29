@@ -1,5 +1,5 @@
-import 'package:flutterprojectsample/widget/base/base_page_widget.dart';
+import 'package:flutterprojectsample/widget/provider/base_page_widget.dart';
 
-class HomeIndexModel extends BasePageModel {
+class HomeIndexModel extends BaseProviderPageModel {
   HomeIndexModel() : super(state: WidgetState.LOADING);
 }
