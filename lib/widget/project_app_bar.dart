@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -25,7 +26,7 @@ class ProjectAppBar extends PreferredSize {
       actions: actions ?? [],
       leading: (leading == null && canPop)
           ? IconButton(
-              icon: const Icon(Icons.arrow_back_ios),
+              icon: const Icon(CupertinoIcons.back),
               tooltip: MaterialLocalizations.of(context).backButtonTooltip,
               onPressed: () => onBackPressed == null ? Navigator.maybePop(context) : onBackPressed())
           : leading,

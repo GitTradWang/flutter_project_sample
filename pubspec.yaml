@@ -54,12 +54,13 @@ dependencies:
   flutter_html: ^0.11.1
   #路由框架
   fluro: ^1.6.3
-
+  #注解
+  meta: ^1.1.8
   #国际化
   intl: any
   #视频播放
   video_player: ^0.10.9+1
-
+  #屏幕适配
   screen_ratio_adapter: ^0.0.2
 
 dev_dependencies:
@@ -68,6 +69,9 @@ dev_dependencies:
     sdk: flutter
 
   test: ^1.9.4
+
+  #通过yaml配置启动图标
+  flutter_launcher_icons: ^0.7.5
 
 flutter:
 
@@ -82,3 +86,8 @@ flutter:
     # res/img/*
     # assets end
     #以上是生成R文件的注释请不要删除
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "res/img/launch_image.png"

@@ -2,13 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutterprojectsample/config/app_navigator.dart';
 import 'package:flutterprojectsample/config/app_router.dart';
 import 'package:flutterprojectsample/page/home/index/home_index_model.dart';
+import 'package:flutterprojectsample/widget/cache_image.dart';
 import 'package:flutterprojectsample/widget/page_state_widget.dart';
 import 'package:flutterprojectsample/widget/project_app_bar.dart';
 import 'package:flutterprojectsample/widget/provider/base_page_widget.dart';
-import 'package:shimmer/shimmer.dart';
 
 class HomeIndexPage extends StatefulWidget {
   @override
@@ -33,25 +34,23 @@ class _HomeIndexPageState extends State<HomeIndexPage>
     super.build(context);
     return BaseProviderPageWidget<HomeIndexModel>(
       create: (BuildContext context) => _homeIndexModel,
-      loadingBuilder: (context, model) =>
-          PageLoadingListWidget(
-            itemBuilder: (BuildContext context, int index) =>
-                Container(
-                  margin: EdgeInsets.all(10),
-                  height: 200,
-                  color: Colors.amber,
-                  child: Center(
-                    child: Container(
-                      width: 200,
-                      height: 100,
-                    ),
-                  ),
-                ),
+      loadingBuilder: (context, model) => PageLoadingListWidget(
+        itemBuilder: (BuildContext context, int index) => Container(
+          margin: EdgeInsets.all(10),
+          height: 200,
+          color: Colors.amber,
+          child: Center(
+            child: Container(
+              width: 200,
+              height: 100,
+            ),
           ),
+        ),
+      ),
       appBar: ProjectAppBar(
         title: Text('首页'),
       ),
-      body:_Body(),
+      body: _Body(),
     );
   }
 
@@ -67,7 +66,6 @@ class _HomeIndexPageState extends State<HomeIndexPage>
 class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: <Widget>[
         Center(
@@ -76,24 +74,20 @@ class _Body extends StatelessWidget {
                 AppNavigator.navigateTo(context, RouterName.uiSamplePage),
           ),
         ),
-        SizedBox(
-          width: 200.0,
-          height: 100.0,
-          child: Shimmer.fromColors(
-            baseColor: Colors.red,
-            highlightColor: Colors.yellow,
-            child: Text(
-              'Shimmer',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 40.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+        CacheImage(
+          url:
+              'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3675415932,4054970339&fm=26&gp=10.jpg',
+          width: 250,
+          height: 100,
+          fit: BoxFit.cover,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(50),
+            bottomLeft: Radius.zero,
+            bottomRight: Radius.circular(50),
+            topRight: Radius.circular(50),
           ),
         ),
       ],
     );
   }
-
 }
